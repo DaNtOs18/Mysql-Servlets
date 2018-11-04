@@ -11,15 +11,15 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Consulta las Bases de Datos</title>
+<title>Consulta las Tablas de una Bases de Datos</title>
 </head>
 <body>
 
-	<h1>Lista de Bases de Datos</h1>
+	<h1>Lista de Tablas</h1>
 
 	<ul>
 
-		<c:forEach items="${db}" var="elemento">
+		<c:forEach items="${database}" var="elemento">
 
 			<li>${elemento}</li>
 
@@ -27,11 +27,5 @@
 
 	</ul>
 
-	<form action="conecta?opcion=4" method="post">
-
-		Escribe el nombre de una de las Bases de Datos: <input type="text" name="database" /> <input type="submit"
-			value="Consulta" name="consulta" />
-
-	</form>
 </body>
 </html>

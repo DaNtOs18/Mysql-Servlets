@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import modelo.Libro;
 import utilidades.Conexion;
@@ -40,6 +41,9 @@ public class Controlador extends HttpServlet {
 
 		String opcion = request.getParameter("opcion");
 		String rutaJSP = "";
+		//HttpSession se = request.getSession();
+		//se.setAttribute("dbName", dbName);
+		
 		switch (opcion) {
 		case "1":
 			rutaJSP = "mensaje";
@@ -53,10 +57,21 @@ public class Controlador extends HttpServlet {
 			rutaJSP = "bbdd";			
 			opcion3(request);
 			break;
+		case "4":
+			rutaJSP = "database";			
+			opcion4(request);
+			break;
 		default:
 			break;
 		}
 		request.getRequestDispatcher("jsp/" + rutaJSP + ".jsp").forward(request, response);
+	}
+	
+	public void opcion4(HttpServletRequest request) {
+		String dbName = request.getParameter("database");
+		ArrayList<Object> database = Conexion.getAllTables(dbName);
+		request.setAttribute("database", database);
+		
 	}
 	public void opcion3(HttpServletRequest request) {
 		ArrayList<Object> db = Conexion.getAllDB();

@@ -99,4 +99,32 @@ public class Conexion {
 				// "SELECT * FROM eshop.books;"
 
 	}
+	
+public static ArrayList<Object> getAllTables(String dbName) {
+	
+		ArrayList<Object> resultado = new ArrayList<Object>();
+		String sql = "SHOW tables FROM " + dbName + ";";
+
+		try {
+			conexion = conectar("localhost:3306", dbName, "root", "");
+			Statement stmt = conexion.createStatement();
+			ResultSet rS = stmt.executeQuery(sql);
+			//ResultSetMetaData metaData = rS.getMetaData();
+			
+			if (!rS.first())// no hay registros
+				return null;
+
+			while (rS.next()) {
+				Object table = new Object();
+				table = rS.getString("Tables_in_" + dbName);
+				resultado.add(table);
+
+			}
+			return resultado;
+		} catch (SQLException e) {
+			System.out.println("Error leyendo la Base de Datos -> " + e.getMessage());
+		}
+		return resultado;
+		
+	}
 }
