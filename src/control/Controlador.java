@@ -68,7 +68,8 @@ public class Controlador extends HttpServlet {
 	}
 	
 	public void opcion4(HttpServletRequest request) {
-		String dbName = request.getParameter("database");
+		String dbName = request.getParameter("dbName");
+		System.out.println(dbName);
 		ArrayList<Object> database = Conexion.getAllTables(dbName);
 		request.setAttribute("database", database);
 		

@@ -65,7 +65,7 @@ public class Conexion {
 	public static ArrayList<Object> getAllDB() {
 		
 		ArrayList<Object> resultado = new ArrayList<Object>();
-		String sql = "SELECT * FROM Schemata WHERE SCHEMA_NAME NOT IN ('information_schema','mysql','performance_schema');";
+		String sql = "SELECT schema_name FROM information_schema.schemata WHERE schema_name NOT IN ('mysql','information_schema','performance_schema','phpmyadmin');";
 
 		try {
 			conexion = conectar("localhost:3306", "information_schema", "root", "");

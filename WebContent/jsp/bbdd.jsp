@@ -21,17 +21,17 @@
 
 		<c:forEach items="${db}" var="elemento">
 
-			<li>${elemento}</li>
+			<li id="database"><A HREF="conecta?opcion=4&dbName=${elemento}">${elemento}</A></li>
 
 		</c:forEach>
 
 	</ul>
 
-	<form action="conecta?opcion=4" method="post">
+<!-- 	<form action="conecta?opcion=4" method="post"> -->
 
-		Escribe el nombre de una de las Bases de Datos: <input type="text" name="database" /> <input type="submit"
-			value="Consulta" name="consulta" />
+<!-- 		Escribe el nombre de una de las Bases de Datos: <input type="text" name="database" /> <input type="submit" -->
+<!-- 			value="Consulta" name="consulta" /> -->
 
-	</form>
+<!-- 	</form> -->
 </body>
 </html>
