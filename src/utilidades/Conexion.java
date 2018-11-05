@@ -63,7 +63,7 @@ public class Conexion {
 	}
 
 	public static ArrayList<Object> getAllDB() {
-		
+
 		ArrayList<Object> resultado = new ArrayList<Object>();
 		String sql = "SELECT schema_name FROM information_schema.schemata WHERE schema_name NOT IN ('mysql','information_schema','performance_schema','phpmyadmin');";
 
@@ -71,8 +71,8 @@ public class Conexion {
 			conexion = conectar("localhost:3306", "information_schema", "root", "");
 			Statement stmt = conexion.createStatement();
 			ResultSet rS = stmt.executeQuery(sql);
-			//ResultSetMetaData metaData = rS.getMetaData();
-			
+			// ResultSetMetaData metaData = rS.getMetaData();
+
 			if (!rS.first())// no hay registros
 				return null;
 
@@ -87,21 +87,21 @@ public class Conexion {
 			System.out.println("Error leyendo Bases de Datos -> " + e.getMessage());
 		}
 		return resultado;
-		
-		// "SELECT schema_name FROM information_schema.schemata WHERE schema_name NOT IN
-				// ('mysql','information_schema','performance_schema');"
 
-				// "SELECT * FROM Schemata;"
-				// "SELECT * FROM Schemata WHERE SCHEMA_NAME NOT IN
-				// ('information_schema','mysql','performance_schema');"
-				// "SELECT table_name FROM tables WHERE table_schema='eshop';"
-				// "SHOW tables FROM eshop;"
-				// "SELECT * FROM eshop.books;"
+		// "SELECT schema_name FROM information_schema.schemata WHERE schema_name NOT IN
+		// ('mysql','information_schema','performance_schema');"
+
+		// "SELECT * FROM Schemata;"
+		// "SELECT * FROM Schemata WHERE SCHEMA_NAME NOT IN
+		// ('information_schema','mysql','performance_schema');"
+		// "SELECT table_name FROM tables WHERE table_schema='eshop';"
+		// "SHOW tables FROM eshop;"
+		// "SELECT * FROM eshop.books;"
 
 	}
-	
-public static ArrayList<Object> getAllTables(String dbName) {
-	
+
+	public static ArrayList<Object> getAllTables(String dbName) {
+
 		ArrayList<Object> resultado = new ArrayList<Object>();
 		String sql = "SHOW tables FROM " + dbName + ";";
 
@@ -109,8 +109,8 @@ public static ArrayList<Object> getAllTables(String dbName) {
 			conexion = conectar("localhost:3306", dbName, "root", "");
 			Statement stmt = conexion.createStatement();
 			ResultSet rS = stmt.executeQuery(sql);
-			//ResultSetMetaData metaData = rS.getMetaData();
-			
+			// ResultSetMetaData metaData = rS.getMetaData();
+
 			if (!rS.first())// no hay registros
 				return null;
 
@@ -125,6 +125,40 @@ public static ArrayList<Object> getAllTables(String dbName) {
 			System.out.println("Error leyendo la Base de Datos -> " + e.getMessage());
 		}
 		return resultado;
-		
+
 	}
+
+	public static ArrayList<HashMap<String, Object>> getAllParam(String dbName, String table) {
+
+		ArrayList<HashMap<String, Object>> resultado = new ArrayList<HashMap<String, Object>>();
+		String sql = "SELECT * FROM " + table + ";";
+
+		try {
+			conexion = conectar("localhost:3306", dbName, "root", "");
+			Statement stmt = conexion.createStatement();
+			ResultSet rS = stmt.executeQuery(sql);
+			ResultSetMetaData metaData = rS.getMetaData();
+
+			if (!rS.first())// no hay registros
+				return null;
+
+			while (rS.next()) {
+
+				HashMap<String, Object> registro = new HashMap<String, Object>();
+				resultado.add(registro);
+
+				for (int i = 1; i <= metaData.getColumnCount(); i++) {
+					registro.put(metaData.getColumnName(i), rS.getString(i));
+					// System.out.println(metaData.getColumnName(i) + " => " + rS.getString(i));
+				}
+
+			}
+			return resultado;
+		} catch (SQLException e) {
+			System.out.println("Error leyendo las tablas -> " + e.getMessage());
+		}
+		return resultado;
+
+	}
+
 }

@@ -11,17 +11,17 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Consulta las Tablas de una Bases de Datos</title>
+<title>Contenido de la tabla</title>
 </head>
 <body>
 
-	<h1>Lista de Tablas</h1>
+	<h1>Contenido de la tabla</h1>
 
 	<ul>
 
-		<c:forEach items="${database}" var="elemento">
+		<c:forEach items="${tables}" var="elemento">
 
-			<li id="tables"><A HREF="conecta?opcion=5&table=${elemento}">${elemento}</A></li>
+			<li>${elemento}</li>
 
 		</c:forEach>
 

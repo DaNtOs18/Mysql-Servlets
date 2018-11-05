@@ -61,15 +61,26 @@ public class Controlador extends HttpServlet {
 			rutaJSP = "database";			
 			opcion4(request);
 			break;
+		case "5":
+			rutaJSP = "table";			
+			opcion5(request);
+			break;
 		default:
 			break;
 		}
 		request.getRequestDispatcher("jsp/" + rutaJSP + ".jsp").forward(request, response);
 	}
 	
+	public void opcion5(HttpServletRequest request) {
+		String table = request.getParameter("table");
+		String dbName = (String) request.getServletContext().getAttribute("dbName");
+		ArrayList<HashMap<String, Object>> tables = Conexion.getAllParam(dbName,table);
+		request.setAttribute("tables", tables);
+		
+	}
 	public void opcion4(HttpServletRequest request) {
 		String dbName = request.getParameter("dbName");
-		System.out.println(dbName);
+		request.getServletContext().setAttribute("dbName", dbName);
 		ArrayList<Object> database = Conexion.getAllTables(dbName);
 		request.setAttribute("database", database);
 		
