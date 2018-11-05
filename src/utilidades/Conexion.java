@@ -73,8 +73,8 @@ public class Conexion {
 			ResultSet rS = stmt.executeQuery(sql);
 			// ResultSetMetaData metaData = rS.getMetaData();
 
-			if (!rS.first())// no hay registros
-				return null;
+			//if (!rS.first())// no hay registros
+				//return null;
 
 			while (rS.next()) {
 				Object obj = new Object();
@@ -111,8 +111,8 @@ public class Conexion {
 			ResultSet rS = stmt.executeQuery(sql);
 			// ResultSetMetaData metaData = rS.getMetaData();
 
-			if (!rS.first())// no hay registros
-				return null;
+			//if (!rS.first())// no hay registros
+				//return null;
 
 			while (rS.next()) {
 				Object table = new Object();
@@ -139,8 +139,8 @@ public class Conexion {
 			ResultSet rS = stmt.executeQuery(sql);
 			ResultSetMetaData metaData = rS.getMetaData();
 
-			if (!rS.first())// no hay registros
-				return null;
+			//if (!rS.first())// no hay registros
+				//return null;
 
 			while (rS.next()) {
 
