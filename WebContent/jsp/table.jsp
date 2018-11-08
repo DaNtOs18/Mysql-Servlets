@@ -20,9 +20,9 @@
 	<ul>
 
 		<c:forEach items="${tables}" var="elemento">
-
-			<li>${elemento}</li>
-
+			<c:forEach items="${elemento}" var="campo">
+				<li>${campo.key}->${campo.value}</li>
+			</c:forEach>
 		</c:forEach>
 
 	</ul>
